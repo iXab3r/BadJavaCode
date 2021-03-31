@@ -7,15 +7,19 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class Main {
 
-    public static void main(String[] args) {
-	// write your code here
+    public static void main(String[] args) throws InterruptedException {
+        // write your code here
         LoginService  validator = new LoginService();
 
-        validator.login("admin", "admin");
+        validator.login("admin", "password");
+        Thread.sleep(500);
 
         if (!validator.isLoggedIn("admin")) throw new AssertionError("Admin must be logged in");
+        Thread.sleep(500);
 
         validator.logout("admin");
+        Thread.sleep(500);
+
         if (validator.isLoggedIn("admin")) throw new AssertionError("Admin must be logged out");
 
         System.exit(0);
